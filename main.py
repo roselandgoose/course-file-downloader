@@ -5,6 +5,9 @@ from selenium.webdriver.chrome.options import Options # for specifying headlessn
 from time import sleep # for adding human delays
 from random import random as rand # for randomizing delays
 
+user = ""
+password = ""
+
 # 0: no debugging --> 1: print delays and error catches --> 2: print function calls --> 3: print try attempts and exits
 verbose_level = 3
 
@@ -47,8 +50,14 @@ class agent:
         vprint("agent.login_canvas", 2)
         self.driver.get("https://canvas.northwestern.edu/files")
 
+        user_form = self.driver.find_element_by_id('IDToken1')
+        psswd_form = self.driver.find_element_by_id('IDToken2')
+
+        user_form.send_keys(user)
         delay(0.5, 1)
-        vprint("Fetched web page!", 1)
+        psswd_form.send_keys(password)
+        delay(0.5, 1)
+        psswd_form.submit()
 
 
 if __name__ == "__main__":
